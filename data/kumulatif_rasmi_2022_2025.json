@@ -1,0 +1,322 @@
+{
+  "2022": {
+    "MBSA": {
+      "warta": 197.088,
+      "dalamProses": 227.514,
+      "belumWarta": 1728.842,
+      "total": 2153.444
+    },
+    "MBPJ": {
+      "warta": 209.21,
+      "dalamProses": 106.06,
+      "belumWarta": 60.504000000000005,
+      "total": 375.774
+    },
+    "MBSJ": {
+      "warta": 325.33329999999995,
+      "dalamProses": 55.06,
+      "belumWarta": 342.74,
+      "total": 723.1333
+    },
+    "MBDK": {
+      "warta": 548.9367,
+      "dalamProses": 42.0209,
+      "belumWarta": 153.92,
+      "total": 744.8775999999999
+    },
+    "MPAJ": {
+      "warta": 139.054,
+      "dalamProses": 190.521,
+      "belumWarta": 203.857,
+      "total": 533.432
+    },
+    "MPKj": {
+      "warta": 477.7871,
+      "dalamProses": 34.11,
+      "belumWarta": 427.74,
+      "total": 939.6371
+    },
+    "MPS": {
+      "warta": 232.41000000000003,
+      "dalamProses": 123.99000000000001,
+      "belumWarta": 59.71000000000001,
+      "total": 416.11
+    },
+    "MPSepang": {
+      "warta": 278.745,
+      "dalamProses": 126.125,
+      "belumWarta": 0.0,
+      "total": 404.87
+    },
+    "MPKL": {
+      "warta": 94.01,
+      "dalamProses": 67.17999999999999,
+      "belumWarta": 41.38999999999999,
+      "total": 202.57999999999998
+    },
+    "MPKS": {
+      "warta": 75.888,
+      "dalamProses": 51.25,
+      "belumWarta": 15.91,
+      "total": 143.048
+    },
+    "MPHS": {
+      "warta": 48.9,
+      "dalamProses": 306.99,
+      "belumWarta": 0.0,
+      "total": 355.89
+    },
+    "MDSB": {
+      "warta": 21.8963,
+      "dalamProses": 0.4133,
+      "belumWarta": 29.11,
+      "total": 51.4196
+    },
+    "_TOTAL": {
+      "warta": 2649.2604,
+      "dalamProses": 1331.2342,
+      "belumWarta": 3844.988,
+      "total": 7825.482599999999
+    }
+  },
+  "2023": {
+    "MBSA": {
+      "warta": 204.078,
+      "dalamProses": 233.948,
+      "belumWarta": 1731.5020000000002,
+      "total": 2169.5280000000002
+    },
+    "MBPJ": {
+      "warta": 211.043,
+      "dalamProses": 265.6121,
+      "belumWarta": 60.504000000000005,
+      "total": 537.1591
+    },
+    "MBSJ": {
+      "warta": 332.75129999999996,
+      "dalamProses": 62.31,
+      "belumWarta": 802.37,
+      "total": 1197.4313
+    },
+    "MBDK": {
+      "warta": 549.8267,
+      "dalamProses": 42.039899999999996,
+      "belumWarta": 196.005,
+      "total": 787.8716
+    },
+    "MPAJ": {
+      "warta": 139.827,
+      "dalamProses": 213.548,
+      "belumWarta": 203.857,
+      "total": 557.232
+    },
+    "MPKj": {
+      "warta": 490.8301,
+      "dalamProses": 65.82,
+      "belumWarta": 427.74,
+      "total": 984.3901000000001
+    },
+    "MPS": {
+      "warta": 240.64200000000002,
+      "dalamProses": 124.313,
+      "belumWarta": 60.30050000000001,
+      "total": 425.25550000000004
+    },
+    "MPSepang": {
+      "warta": 292.865,
+      "dalamProses": 163.265,
+      "belumWarta": 56.28,
+      "total": 512.41
+    },
+    "MPKL": {
+      "warta": 94.01,
+      "dalamProses": 69.35,
+      "belumWarta": 51.69,
+      "total": 215.05
+    },
+    "MPKS": {
+      "warta": 75.888,
+      "dalamProses": 60.1778,
+      "belumWarta": 27.78,
+      "total": 163.8458
+    },
+    "MPHS": {
+      "warta": 48.9,
+      "dalamProses": 653.94,
+      "belumWarta": 63.35,
+      "total": 766.19
+    },
+    "MDSB": {
+      "warta": 22.0836,
+      "dalamProses": 0.4133,
+      "belumWarta": 29.11,
+      "total": 51.606899999999996
+    },
+    "_TOTAL": {
+      "warta": 2702.7467,
+      "dalamProses": 1954.7371,
+      "belumWarta": 4491.7535,
+      "total": 9149.2373
+    }
+  },
+  "2024": {
+    "MBSA": {
+      "warta": 225.668,
+      "dalamProses": 258.598,
+      "belumWarta": 1739.4120000000003,
+      "total": 2223.6780000000003
+    },
+    "MBPJ": {
+      "warta": 213.443,
+      "dalamProses": 265.6121,
+      "belumWarta": 60.504000000000005,
+      "total": 539.5591000000001
+    },
+    "MBSJ": {
+      "warta": 344.61129999999997,
+      "dalamProses": 62.31,
+      "belumWarta": 802.37,
+      "total": 1209.2912999999999
+    },
+    "MBDK": {
+      "warta": 550.2266999999999,
+      "dalamProses": 84.12989999999999,
+      "belumWarta": 196.005,
+      "total": 830.3616
+    },
+    "MPAJ": {
+      "warta": 139.827,
+      "dalamProses": 224.388,
+      "belumWarta": 203.857,
+      "total": 568.072
+    },
+    "MPKj": {
+      "warta": 494.9201,
+      "dalamProses": 65.82,
+      "belumWarta": 427.74,
+      "total": 988.4801
+    },
+    "MPS": {
+      "warta": 243.64200000000002,
+      "dalamProses": 128.043,
+      "belumWarta": 60.30050000000001,
+      "total": 431.98550000000006
+    },
+    "MPSepang": {
+      "warta": 299.365,
+      "dalamProses": 169.64499999999998,
+      "belumWarta": 161.85000000000002,
+      "total": 630.86
+    },
+    "MPKL": {
+      "warta": 95.93,
+      "dalamProses": 71.13,
+      "belumWarta": 54.599999999999994,
+      "total": 221.66
+    },
+    "MPKS": {
+      "warta": 75.888,
+      "dalamProses": 60.1778,
+      "belumWarta": 27.78,
+      "total": 163.8458
+    },
+    "MPHS": {
+      "warta": 48.9,
+      "dalamProses": 653.94,
+      "belumWarta": 63.35,
+      "total": 766.19
+    },
+    "MDSB": {
+      "warta": 23.3636,
+      "dalamProses": 0.4133,
+      "belumWarta": 29.11,
+      "total": 52.8869
+    },
+    "_TOTAL": {
+      "warta": 2755.7867,
+      "dalamProses": 2044.2071,
+      "belumWarta": 4608.1435,
+      "total": 9408.1373
+    }
+  },
+  "2025": {
+    "MBSA": {
+      "warta": 227.68800000000002,
+      "dalamProses": 258.598,
+      "belumWarta": 1746.3820000000003,
+      "total": 2232.6680000000006
+    },
+    "MBPJ": {
+      "warta": 217.043,
+      "dalamProses": 272.1521,
+      "belumWarta": 61.77400000000001,
+      "total": 550.9691
+    },
+    "MBSJ": {
+      "warta": 347.7213,
+      "dalamProses": 65.74000000000001,
+      "belumWarta": 802.37,
+      "total": 1215.8313
+    },
+    "MBDK": {
+      "warta": 553.7967,
+      "dalamProses": 89.70989999999999,
+      "belumWarta": 196.405,
+      "total": 839.9115999999999
+    },
+    "MPAJ": {
+      "warta": 143.057,
+      "dalamProses": 261.698,
+      "belumWarta": 208.327,
+      "total": 613.082
+    },
+    "MPKj": {
+      "warta": 506.1701,
+      "dalamProses": 65.82,
+      "belumWarta": 427.74,
+      "total": 999.7301
+    },
+    "MPS": {
+      "warta": 243.64200000000002,
+      "dalamProses": 135.463,
+      "belumWarta": 80.22050000000002,
+      "total": 459.32550000000003
+    },
+    "MPSepang": {
+      "warta": 308.975,
+      "dalamProses": 199.825,
+      "belumWarta": 165.07000000000002,
+      "total": 673.87
+    },
+    "MPKL": {
+      "warta": 95.93,
+      "dalamProses": 74.21,
+      "belumWarta": 60.919999999999995,
+      "total": 231.05999999999997
+    },
+    "MPKS": {
+      "warta": 80.418,
+      "dalamProses": 76.45779999999999,
+      "belumWarta": 27.78,
+      "total": 184.6558
+    },
+    "MPHS": {
+      "warta": 49.46,
+      "dalamProses": 661.1700000000001,
+      "belumWarta": 67.37,
+      "total": 778.0000000000001
+    },
+    "MDSB": {
+      "warta": 23.5136,
+      "dalamProses": 0.4133,
+      "belumWarta": 29.33,
+      "total": 53.2569
+    },
+    "_TOTAL": {
+      "warta": 2797.4167,
+      "dalamProses": 2161.2571000000003,
+      "belumWarta": 4654.9535000000005,
+      "total": 9613.6273
+    }
+  }
+}

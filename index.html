@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard Kawasan Lapang Negeri Selangor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root{
+ --bg:#f8f3ed; --panel:#fffdfa; --panel2:#fff8f0; --line:#eadfd2; --ink:#172236;
+ --muted:#708094; --accent:#e9782b; --accent2:#c94d32; --gold:#f1a53a; --blue:#4da3ff;
+ --green:#38c95d; --lime:#7cff61; --amber:#ffc857;
+ --shadow:0 14px 34px rgba(124,82,44,.10); --radius:18px;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Arial,sans-serif;background:radial-gradient(circle at 82% 0%,rgba(242,165,58,.11),transparent 30%),linear-gradient(145deg,#fffaf5,#f7f1ea 55%,#f5eee6);color:var(--ink)}
+a{color:inherit}
+.hero{padding:22px 28px;background:linear-gradient(110deg,rgba(255,253,249,.97),rgba(255,247,238,.96));
+ border-bottom:1px solid var(--line);box-shadow:0 8px 26px rgba(124,82,44,.055);position:sticky;top:0;z-index:1000;backdrop-filter:blur(12px)}
+.hero-inner{max-width:1600px;margin:auto;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.eyebrow{color:var(--accent2);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+h1{margin:5px 0 8px;font-size:clamp(25px,3.2vw,42px);line-height:1.08}
+.hero p{margin:0;color:var(--muted);font-size:13px}
+.warta-badge{display:flex;align-items:center;gap:12px;background:rgba(255,253,249,.94);padding:10px 14px;border:1px solid var(--line);border-radius:16px;backdrop-filter:blur(7px)}
+.warta-badge img{width:58px;height:58px;border-radius:50%;object-fit:cover}
+.warta-badge b{display:block;font-size:14px}.warta-badge span{font-size:11px;color:var(--muted)}
+.wrap{max-width:1600px;margin:auto;padding:16px}
+.pbt-panel,.panel,.control,.kpi{background:linear-gradient(180deg,rgba(255,255,255,.995),rgba(255,251,246,.99));border:1px solid var(--line);box-shadow:var(--shadow)}
+.pbt-panel{border-radius:var(--radius);padding:12px;margin-bottom:14px}
+.pbt-head{display:flex;align-items:center;justify-content:space-between;margin:0 2px 10px}
+.pbt-head b{font-size:13px}.pbt-head span{font-size:11px;color:var(--muted)}
+.pbt-strip{display:grid;grid-template-columns:repeat(13,minmax(82px,1fr));gap:8px}
+.pbt-btn{border:1px solid #dfd2c2;background:#fffefa;color:#172236;border-radius:14px;padding:8px 6px;cursor:pointer;min-height:86px;transition:.2s}
+.pbt-btn:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 8px 18px rgba(190,87,40,.12)}
+.pbt-btn.active{outline:2px solid var(--accent);background:#fff4e8}
+.pbt-btn img{display:block;margin:0 auto 5px;width:48px;height:48px;object-fit:contain}
+.pbt-btn .all-icon{width:48px;height:48px;margin:0 auto 5px;border-radius:50%;display:grid;place-items:center;background:#fff1e3;color:var(--accent2);font-size:20px}
+.pbt-btn small{font-size:10px;font-weight:800}
+.filters{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+.control{border-radius:14px;padding:10px 12px;display:grid;grid-template-columns:38px 1fr;gap:9px;align-items:center}
+.control img{width:34px;height:34px}
+.control label{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;font-weight:800;letter-spacing:.06em}
+select{width:100%;border:0;outline:0;background:transparent;color:#172236;font:600 13px Inter}
+select option{color:#111}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+.kpi{border-radius:16px;padding:14px;display:grid;grid-template-columns:48px 1fr;gap:12px;align-items:center}
+.kpi img{width:46px;height:46px}.kpi small{color:var(--muted);font-weight:700}.kpi strong{display:block;font-size:25px;margin-top:3px}.kpi em{font-size:10px;color:#c94d32;font-style:normal}
+.layout{display:grid;grid-template-columns:minmax(0,2.1fr) minmax(340px,.9fr);gap:12px}
+.panel{border-radius:var(--radius);overflow:hidden}
+.panel-title{padding:13px 15px 4px;font-size:13px;font-weight:800}
+.panel-sub{padding:0 15px 10px;color:var(--muted);font-size:10px}
+#map{height:610px;background:#eef3f7}
+.side{display:grid;grid-template-rows:auto 1fr 1fr;gap:12px}
+.selected-pbt{padding:14px;display:flex;align-items:center;gap:13px}
+.selected-pbt img{width:68px;height:68px;object-fit:contain;background:#fffefa;border:1px solid #eadfd2;border-radius:12px;padding:4px}
+.selected-pbt .txt b{font-size:15px}.selected-pbt .txt span{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.chartbox{height:245px;padding:6px 12px 12px}
+.bottom{display:grid;grid-template-columns:1.4fr .8fr;gap:12px;margin-top:12px}
+.trend .chartbox{height:300px}
+.warta-card{padding:14px;display:grid;grid-template-columns:92px 1fr;gap:14px;align-items:center}
+.warta-card img{width:88px;height:88px;border-radius:50%;object-fit:cover}
+.warta-card h3{margin:0 0 5px;font-size:15px}.warta-card p{margin:0;color:var(--muted);font-size:11px;line-height:1.5}
+.warta-chip{display:inline-flex;margin-top:8px;padding:5px 9px;border-radius:999px;background:#fff4e8;border:1px solid #ecd8c5;color:#c94d32;font-size:10px;font-weight:800}
+.loading{text-align:center;padding:30px;color:var(--muted)}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#fffdfb;color:#223247;border:1px solid #eadfce}
+.popup-title{font-weight:800;color:#c94d32;margin-bottom:8px}.popup-row{font-size:11px;margin:4px 0}.popup-row b{display:inline-block;min-width:82px;color:#708094}
+footer{max-width:1600px;margin:0 auto;color:#7f8c9b;font-size:10px;padding:16px;text-align:center}
+@media(max-width:1250px){.pbt-strip{grid-template-columns:repeat(7,1fr)}.layout{grid-template-columns:1fr}.side{grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto}.selected-pbt{min-height:280px;align-content:center;justify-content:center;flex-direction:column;text-align:center}}
+@media(max-width:900px){.filters,.kpis,.bottom{grid-template-columns:repeat(2,1fr)}.pbt-strip{grid-template-columns:repeat(4,1fr)}.side{grid-template-columns:1fr}.selected-pbt{min-height:auto;flex-direction:row;text-align:left;justify-content:flex-start}#map{height:520px}.hero-inner{grid-template-columns:1fr}.warta-badge{display:none}}
+@media(max-width:560px){.filters,.kpis,.bottom{grid-template-columns:1fr}.pbt-strip{grid-template-columns:repeat(3,1fr)}.wrap{padding:9px}.hero{padding:18px 14px}#map{height:460px}}
+
+.map-legend{position:absolute;z-index:650;left:12px;bottom:12px;background:rgba(255,252,248,.97);
+ border:1px solid #ead9c7;border-radius:10px;padding:9px 11px;box-shadow:0 8px 20px rgba(124,82,44,.12);
+ font-size:10px;color:#233348;line-height:1.55}
+.map-legend b{display:block;margin-bottom:4px;color:#a65d2d}
+.map-legend span{display:flex;align-items:center;gap:7px}
+.map-swatch{width:13px;height:9px;border-radius:3px;display:inline-block;border:1.5px solid}
+.sw-warta{background:#62e45f;border-color:#c94d32}
+.sw-other{background:#80e95f;border-color:#4da3ff}
+
+@media(max-width:700px){#cumSummary{grid-template-columns:1fr 1fr!important}}
+
+.boundary-label{background:transparent!important;border:0!important;box-shadow:none!important}
+.boundary-label::before{display:none!important}
+.boundary-label span{display:inline-block;padding:2px 5px;border-radius:4px;background:rgba(255,255,255,.62);
+ text-shadow:0 1px 1px rgba(255,255,255,.95);white-space:nowrap}
+.boundary-label.district span{color:#4B5563;font-size:10px;font-weight:650}
+.boundary-label.pbt span{color:#6B7280;font-size:9px;font-weight:600}
+.map-layer-control{background:rgba(255,253,250,.94);border:1px solid #e7ded4;border-radius:10px;
+ padding:8px 10px;box-shadow:0 8px 20px rgba(0,0,0,.10);font-size:11px;color:#263449}
+.map-layer-control b{display:block;margin-bottom:5px}.map-layer-control label{display:block;margin:4px 0;cursor:pointer}
+.map-layer-control input{vertical-align:-1px;margin-right:6px}
+
+
+.view-tabs{max-width:1600px;margin:14px auto 0;padding:0 18px}
+.view-tabs-inner{display:grid;grid-template-columns:1fr 1fr;background:#fffdfa;border:1px solid #eadfd2;border-radius:14px;overflow:hidden;box-shadow:0 10px 24px rgba(124,82,44,.08)}
+.view-tab{appearance:none;border:0;background:transparent;padding:14px 18px;font-weight:800;color:#536174;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;border-bottom:2px solid transparent}
+.view-tab:hover{background:#fff7ef}.view-tab.active{color:#e9782b;background:#fff9f3;border-bottom-color:#e9782b}
+.view-section{display:none}.view-section.active{display:block}
+.analysis-wrap{max-width:1600px;margin:14px auto 0;padding:0 18px 24px}
+.analysis-hero{background:linear-gradient(135deg,#fffdfa,#fff7ef);border:1px solid #eadfd2;border-radius:18px;box-shadow:var(--shadow);padding:16px 18px;margin-bottom:14px}
+.analysis-hero h2{margin:0 0 4px;font-size:20px;color:#172236}.analysis-hero p{margin:0;color:#708094;font-size:12px}
+.analysis-controls{display:grid;grid-template-columns:180px 1fr;gap:12px;margin-top:14px}
+.analysis-controls .control{box-shadow:none}
+.analysis-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+.analysis-kpi{background:#fffdfa;border:1px solid #eadfd2;border-radius:16px;padding:15px;box-shadow:0 10px 22px rgba(124,82,44,.07)}
+.analysis-kpi small{display:block;color:#708094;font-size:11px;margin-bottom:4px}.analysis-kpi strong{display:block;color:#172236;font-size:25px;line-height:1.1}.analysis-kpi em{font-style:normal;color:#c94d32;font-size:10px}
+.analysis-charts{display:grid;grid-template-columns:1.25fr .75fr;gap:14px}
+.analysis-panel{background:#fffdfa;border:1px solid #eadfd2;border-radius:18px;box-shadow:var(--shadow);padding:16px}
+.analysis-panel h3{margin:0 0 4px;font-size:14px;color:#172236}.analysis-panel p{margin:0 0 10px;color:#708094;font-size:11px}
+.analysis-table{width:100%;border-collapse:collapse;font-size:11px}.analysis-table th,.analysis-table td{padding:8px 9px;border-bottom:1px solid #efe6dc;text-align:right}
+.analysis-table th:first-child,.analysis-table td:first-child{text-align:left}.analysis-table th{color:#5f6b7a;background:#fff8f0}.analysis-table tr:last-child td{border-bottom:0}
+@media(max-width:980px){.analysis-grid{grid-template-columns:1fr 1fr}.analysis-charts{grid-template-columns:1fr}}
+@media(max-width:620px){.analysis-grid{grid-template-columns:1fr}.analysis-controls{grid-template-columns:1fr}.view-tabs-inner{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<header class="hero">
+ <div class="hero-inner">
+  <div>
+   <div class="eyebrow">GIS • Kawasan Lapang • Negeri Selangor</div>
+   <h1>Dashboard Kawasan Lapang Negeri Selangor</h1>
+   <p>Analisis spatial 2022–2025 • 2022 ialah data kumulatif sehingga 2022; 2023–2025 ialah data bagi tahun masing-masing.</p>
+  </div>
+  <div class="warta-badge"><img src="assets/logos/warta.png" alt="Warta"><div><b>Warta Kawasan Lapang Awam</b><span>Identiti status pewartaan dalam dashboard</span></div></div>
+ </div>
+</header>
+
+
+<div class="view-tabs">
+  <div class="view-tabs-inner">
+    <button class="view-tab active" id="tabOverview"><span>▥</span> Overview</button>
+    <button class="view-tab" id="tabAnalysis"><span>⌖</span> Analysis</button>
+  </div>
+</div>
+
+<div id="analysisSection" class="view-section">
+  <div class="analysis-wrap">
+    <div class="analysis-hero">
+      <h2>Analisis Kumulatif Tanah Lapang Awam</h2>
+      <p>Semua data kumulatif rasmi 2022–2025 ditempatkan di halaman Analysis. Overview kekal untuk data spatial/peta tahunan.</p>
+      <div class="analysis-controls">
+        <div class="control">
+          <label>Tahun Kumulatif</label>
+          <select id="analysisYear">
+            <option value="2022">2022</option><option value="2023">2023</option>
+            <option value="2024">2024</option><option value="2025" selected>2025</option>
+          </select>
+        </div>
+        <div class="control">
+          <label>PBT</label>
+          <select id="analysisPbt"><option value="_TOTAL">Semua PBT</option></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="analysis-grid">
+      <div class="analysis-kpi"><small>Jumlah Kumulatif</small><strong id="aTotal">–</strong><em>hektar</em></div>
+      <div class="analysis-kpi"><small>Warta</small><strong id="aWarta">–</strong><em>hektar</em></div>
+      <div class="analysis-kpi"><small>Dalam Proses</small><strong id="aProcess">–</strong><em>hektar</em></div>
+      <div class="analysis-kpi"><small>Belum Warta</small><strong id="aBelum">–</strong><em>hektar</em></div>
+    </div>
+
+    <div class="analysis-charts">
+      <div class="analysis-panel">
+        <h3>Trend Kumulatif 2022–2025</h3>
+        <p>Trend jumlah keluasan kumulatif berdasarkan tahun dan PBT dipilih.</p>
+        <canvas id="analysisTrend" height="125"></canvas>
+      </div>
+      <div class="analysis-panel">
+        <h3>Pecahan Status Kumulatif</h3>
+        <p>Warta, Dalam Proses dan Belum Warta.</p>
+        <canvas id="analysisStatus" height="125"></canvas>
+      </div>
+    </div>
+
+    <div class="analysis-panel" style="margin-top:14px">
+      <h3>Ringkasan Kumulatif Mengikut PBT</h3>
+      <p>Nilai rasmi pada tahun yang dipilih.</p>
+      <div style="overflow:auto">
+        <table class="analysis-table">
+          <thead><tr><th>PBT</th><th>Warta</th><th>Dalam Proses</th><th>Belum Warta</th><th>Jumlah</th></tr></thead>
+          <tbody id="analysisTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="overviewSection" class="view-section active">
+<main class="wrap">
+ <section class="pbt-panel">
+  <div class="pbt-head"><b>Pilih Pihak Berkuasa Tempatan (PBT)</b><span>Klik logo untuk menapis paparan</span></div>
+  <div class="pbt-strip" id="pbtStrip"></div>
+ </section>
+
+ <section class="filters">
+  <div class="control"><img src="assets/icons/calendar.svg"><div><label>Tahun Data</label><select id="year"><option>2022</option><option>2023</option><option>2024</option><option selected>2025</option></select></div></div>
+  <div class="control"><img src="assets/icons/pbt.svg"><div><label>PBT</label><select id="pbt"><option value="ALL">Semua PBT</option></select></div></div>
+  <div class="control"><img src="assets/icons/warta.svg"><div><label>Status Warta</label><select id="status"><option value="ALL">Semua Status</option></select></div></div>
+  <div class="control"><img src="assets/icons/layers.svg"><div><label>Jenis / GTN 3</label><select id="type"><option value="ALL">Semua Jenis</option></select></div></div>
+ </section>
+
+ <section class="kpis">
+  <div class="kpi"><img src="assets/icons/count.svg"><div><small>Jumlah Kawasan</small><strong id="kpiCount">-</strong><em>bilangan rekod/polygon</em></div></div>
+  <div class="kpi"><img src="assets/icons/area.svg"><div><small>Jumlah Keluasan</small><strong id="kpiArea">-</strong><em>hektar</em></div></div>
+  <div class="kpi"><img src="assets/icons/warta.svg"><div><small>Telah Diwarta</small><strong id="kpiGaz">-</strong><em>rekod berstatus warta</em></div></div>
+  <div class="kpi"><img src="assets/icons/map.svg"><div><small>Bilangan PBT</small><strong id="kpiPbt">-</strong><em>PBT dalam paparan semasa</em></div></div>
+ </section>
+
+ <section class="layout">
+  <div class="panel">
+   <div class="panel-title">Peta Interaktif Kawasan Lapang</div>
+   <div class="panel-sub">Klik polygon untuk maklumat terperinci. Semua filter dan logo PBT mengemas kini peta, KPI dan carta serentak.</div>
+   <div id="map"><div class="loading">Memuatkan peta…</div>
+<div class="map-legend"><b>Kawasan Lapang</b>
+<span><i class="map-swatch sw-warta"></i> Warta</span>
+<span><i class="map-swatch sw-other"></i> Lain-lain status</span>
+</div></div>
+  </div>
+  <aside class="side">
+   <div class="panel selected-pbt">
+    <img id="selectedLogo" src="assets/logos/warta.png" alt="">
+    <div class="txt"><b id="selectedName">Semua PBT</b><span id="selectedDesc">Paparan keseluruhan Negeri Selangor</span></div>
+   </div>
+   <div class="panel"><div class="panel-title">Bilangan Kawasan Mengikut PBT</div><div class="chartbox"><canvas id="pbtChart"></canvas></div></div>
+   <div class="panel"><div class="panel-title">Status Pewartaan</div><div class="chartbox"><canvas id="statusChart"></canvas></div></div>
+  </aside>
+ </section>
+
+ <section class="bottom">
+  <div class="panel trend"><div class="panel-title">Perbandingan Data Mengikut Tahun</div><div class="panel-sub">Perbandingan bilangan rekod dan keluasan dataset 2022–2025.</div><div class="chartbox"><canvas id="trendChart"></canvas></div></div>
+  <div class="panel warta-card"><img src="assets/logos/warta.png" alt="Warta"><div><h3>Warta Kawasan Lapang Awam</h3><p>Elemen ini digunakan untuk menonjolkan maklumat pewartaan. Medan status, nombor warta dan tarikh warta kekal dipaparkan dalam popup jika data tersedia.</p><span class="warta-chip">STATUS PEWARTAAN</span></div></div>
+ </section>
+</main>
+
+</div>
+<footer>Dashboard Tanah Lapang Awam Negeri Selangor • Overview spatial + Analysis kumulatif rasmi 2022–2025</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script>
+const OFFICIAL_CUMULATIVE = {"2022": {"MBSA": {"warta": 197.088, "dalamProses": 227.514, "belumWarta": 1728.842, "total": 2153.444}, "MBPJ": {"warta": 209.21, "dalamProses": 106.06, "belumWarta": 60.504000000000005, "total": 375.774}, "MBSJ": {"warta": 325.33329999999995, "dalamProses": 55.06, "belumWarta": 342.74, "total": 723.1333}, "MBDK": {"warta": 548.9367, "dalamProses": 42.0209, "belumWarta": 153.92, "total": 744.8775999999999}, "MPAJ": {"warta": 139.054, "dalamProses": 190.521, "belumWarta": 203.857, "total": 533.432}, "MPKj": {"warta": 477.7871, "dalamProses": 34.11, "belumWarta": 427.74, "total": 939.6371}, "MPS": {"warta": 232.41000000000003, "dalamProses": 123.99000000000001, "belumWarta": 59.71000000000001, "total": 416.11}, "MPSepang": {"warta": 278.745, "dalamProses": 126.125, "belumWarta": 0.0, "total": 404.87}, "MPKL": {"warta": 94.01, "dalamProses": 67.17999999999999, "belumWarta": 41.38999999999999, "total": 202.57999999999998}, "MPKS": {"warta": 75.888, "dalamProses": 51.25, "belumWarta": 15.91, "total": 143.048}, "MPHS": {"warta": 48.9, "dalamProses": 306.99, "belumWarta": 0.0, "total": 355.89}, "MDSB": {"warta": 21.8963, "dalamProses": 0.4133, "belumWarta": 29.11, "total": 51.4196}, "_TOTAL": {"warta": 2649.2604, "dalamProses": 1331.2342, "belumWarta": 3844.988, "total": 7825.482599999999}}, "2023": {"MBSA": {"warta": 204.078, "dalamProses": 233.948, "belumWarta": 1731.5020000000002, "total": 2169.5280000000002}, "MBPJ": {"warta": 211.043, "dalamProses": 265.6121, "belumWarta": 60.504000000000005, "total": 537.1591}, "MBSJ": {"warta": 332.75129999999996, "dalamProses": 62.31, "belumWarta": 802.37, "total": 1197.4313}, "MBDK": {"warta": 549.8267, "dalamProses": 42.039899999999996, "belumWarta": 196.005, "total": 787.8716}, "MPAJ": {"warta": 139.827, "dalamProses": 213.548, "belumWarta": 203.857, "total": 557.232}, "MPKj": {"warta": 490.8301, "dalamProses": 65.82, "belumWarta": 427.74, "total": 984.3901000000001}, "MPS": {"warta": 240.64200000000002, "dalamProses": 124.313, "belumWarta": 60.30050000000001, "total": 425.25550000000004}, "MPSepang": {"warta": 292.865, "dalamProses": 163.265, "belumWarta": 56.28, "total": 512.41}, "MPKL": {"warta": 94.01, "dalamProses": 69.35, "belumWarta": 51.69, "total": 215.05}, "MPKS": {"warta": 75.888, "dalamProses": 60.1778, "belumWarta": 27.78, "total": 163.8458}, "MPHS": {"warta": 48.9, "dalamProses": 653.94, "belumWarta": 63.35, "total": 766.19}, "MDSB": {"warta": 22.0836, "dalamProses": 0.4133, "belumWarta": 29.11, "total": 51.606899999999996}, "_TOTAL": {"warta": 2702.7467, "dalamProses": 1954.7371, "belumWarta": 4491.7535, "total": 9149.2373}}, "2024": {"MBSA": {"warta": 225.668, "dalamProses": 258.598, "belumWarta": 1739.4120000000003, "total": 2223.6780000000003}, "MBPJ": {"warta": 213.443, "dalamProses": 265.6121, "belumWarta": 60.504000000000005, "total": 539.5591000000001}, "MBSJ": {"warta": 344.61129999999997, "dalamProses": 62.31, "belumWarta": 802.37, "total": 1209.2912999999999}, "MBDK": {"warta": 550.2266999999999, "dalamProses": 84.12989999999999, "belumWarta": 196.005, "total": 830.3616}, "MPAJ": {"warta": 139.827, "dalamProses": 224.388, "belumWarta": 203.857, "total": 568.072}, "MPKj": {"warta": 494.9201, "dalamProses": 65.82, "belumWarta": 427.74, "total": 988.4801}, "MPS": {"warta": 243.64200000000002, "dalamProses": 128.043, "belumWarta": 60.30050000000001, "total": 431.98550000000006}, "MPSepang": {"warta": 299.365, "dalamProses": 169.64499999999998, "belumWarta": 161.85000000000002, "total": 630.86}, "MPKL": {"warta": 95.93, "dalamProses": 71.13, "belumWarta": 54.599999999999994, "total": 221.66}, "MPKS": {"warta": 75.888, "dalamProses": 60.1778, "belumWarta": 27.78, "total": 163.8458}, "MPHS": {"warta": 48.9, "dalamProses": 653.94, "belumWarta": 63.35, "total": 766.19}, "MDSB": {"warta": 23.3636, "dalamProses": 0.4133, "belumWarta": 29.11, "total": 52.8869}, "_TOTAL": {"warta": 2755.7867, "dalamProses": 2044.2071, "belumWarta": 4608.1435, "total": 9408.1373}}, "2025": {"MBSA": {"warta": 227.68800000000002, "dalamProses": 258.598, "belumWarta": 1746.3820000000003, "total": 2232.6680000000006}, "MBPJ": {"warta": 217.043, "dalamProses": 272.1521, "belumWarta": 61.77400000000001, "total": 550.9691}, "MBSJ": {"warta": 347.7213, "dalamProses": 65.74000000000001, "belumWarta": 802.37, "total": 1215.8313}, "MBDK": {"warta": 553.7967, "dalamProses": 89.70989999999999, "belumWarta": 196.405, "total": 839.9115999999999}, "MPAJ": {"warta": 143.057, "dalamProses": 261.698, "belumWarta": 208.327, "total": 613.082}, "MPKj": {"warta": 506.1701, "dalamProses": 65.82, "belumWarta": 427.74, "total": 999.7301}, "MPS": {"warta": 243.64200000000002, "dalamProses": 135.463, "belumWarta": 80.22050000000002, "total": 459.32550000000003}, "MPSepang": {"warta": 308.975, "dalamProses": 199.825, "belumWarta": 165.07000000000002, "total": 673.87}, "MPKL": {"warta": 95.93, "dalamProses": 74.21, "belumWarta": 60.919999999999995, "total": 231.05999999999997}, "MPKS": {"warta": 80.418, "dalamProses": 76.45779999999999, "belumWarta": 27.78, "total": 184.6558}, "MPHS": {"warta": 49.46, "dalamProses": 661.1700000000001, "belumWarta": 67.37, "total": 778.0000000000001}, "MDSB": {"warta": 23.5136, "dalamProses": 0.4133, "belumWarta": 29.33, "total": 53.2569}, "_TOTAL": {"warta": 2797.4167, "dalamProses": 2161.2571000000003, "belumWarta": 4654.9535000000005, "total": 9613.6273}}};
+
+const files={2022:'data/kawasan_lapang_2022.geojson',2023:'data/kawasan_lapang_2023.geojson',2024:'data/kawasan_lapang_2024.geojson',2025:'data/kawasan_lapang_2025.geojson'};
+const pbtMeta={
+ 'MBSA':['Majlis Bandaraya Shah Alam','MBSA.png'],
+ 'MBPJ':['Majlis Bandaraya Petaling Jaya','MBPJ.png'],
+ 'MBSJ':['Majlis Bandaraya Subang Jaya','MBSJ.png'],
+ 'MBDK':['Majlis Bandaraya Diraja Klang','MBDK.png'],
+ 'MPAJ':['Majlis Perbandaran Ampang Jaya','MPAJ.png'],
+ 'MPKJ':['Majlis Perbandaran Kajang','MPKj.png'],
+ 'MPKj':['Majlis Perbandaran Kajang','MPKj.png'],
+ 'MPS':['Majlis Perbandaran Selayang','MPS.png'],
+ 'MPSEPANG':['Majlis Perbandaran Sepang','MPSepang.png'],
+ 'MPSp':['Majlis Perbandaran Sepang','MPSepang.png'],
+ 'MPSepang':['Majlis Perbandaran Sepang','MPSepang.png'],
+ 'MPKL':['Majlis Perbandaran Kuala Langat','MPKL.png'],
+ 'MPKS':['Majlis Perbandaran Kuala Selangor','MPKS.png'],
+ 'MPHS':['Majlis Perbandaran Hulu Selangor','MPHS.png'],
+ 'MDSB':['Majlis Daerah Sabak Bernam','MDSB.png']
+};
+const pbtOrder=['MBSA','MBPJ','MBSJ','MBDK','MPAJ','MPKj','MPS','MPSepang','MPKL','MPKS','MPHS','MDSB'];
+const cache={}; let map,geoLayer,pbtChart,statusChart,trendChart;
+let districtBoundaryLayer=null,pbtBoundaryLayer=null,districtLabelLayer=null,pbtLabelLayer=null;
+ const allSummary={};
+const $=id=>document.getElementById(id);
+const prop=(p,...keys)=>{for(const k of keys){if(p[k]!==undefined&&p[k]!==null&&String(p[k]).trim()!=='')return p[k]}return '-'};
+const clean=v=>String(v??'').trim();
+const fmt=n=>Number(n||0).toLocaleString('ms-MY',{maximumFractionDigits:2});
+const normStatus=v=>{const s=clean(v).toLowerCase();if(!s)return 'Tidak Dinyatakan';if(s.includes('belum'))return 'Belum Warta';if(s.includes('proses'))return 'Dalam Proses';if(s.includes('nyah'))return 'Nyah Warta';if(s.includes('tolak'))return 'Ditolak';if(s.includes('warta'))return 'Warta';return clean(v)};
+function normalizePbt(v){
+ const s=clean(v).replace(/\s+/g,'').toUpperCase();
+ const map={'MPKJ':'MPKj','MPSEPANG':'MPSepang','MPSP':'MPSepang','MAJLISPERBANDARANSEPANG':'MPSepang'};
+ if(map[s]) return map[s];
+ for(const code of pbtOrder){if(s===code.toUpperCase())return code}
+ return clean(v);
+}
+function logoFor(code){const c=normalizePbt(code);return `assets/logos/${(pbtMeta[c]||['','warta.png'])[1]}`}
+
+function buildPbtStrip(){
+ const strip=$('pbtStrip');
+ strip.innerHTML='';
+ const all=document.createElement('button'); all.className='pbt-btn active'; all.dataset.pbt='ALL';
+ all.innerHTML='<div class="all-icon">◎</div><small>SEMUA</small>'; strip.appendChild(all);
+ for(const code of pbtOrder){
+   const b=document.createElement('button');b.className='pbt-btn';b.dataset.pbt=code;
+   b.innerHTML=`<img src="${logoFor(code)}" alt="${code}"><small>${code}</small>`;strip.appendChild(b);
+ }
+ strip.addEventListener('click',e=>{
+   const b=e.target.closest('.pbt-btn'); if(!b)return;
+   $('pbt').value=b.dataset.pbt; syncPbtButtons(); updateAll();
+ });
+}
+function syncPbtButtons(){
+ document.querySelectorAll('.pbt-btn').forEach(b=>b.classList.toggle('active',b.dataset.pbt===$('pbt').value));
+ const code=$('pbt').value;
+ if(code==='ALL'){
+   $('selectedLogo').src='assets/logos/warta.png';$('selectedName').textContent='Semua PBT';$('selectedDesc').textContent='Paparan keseluruhan Negeri Selangor';
+ }else{
+   const meta=pbtMeta[normalizePbt(code)]||[code,'warta.png'];
+   $('selectedLogo').src=logoFor(code);$('selectedName').textContent=meta[0];$('selectedDesc').textContent=normalizePbt(code);
+ }
+}
+function featurePbt(p){return normalizePbt(prop(p,'PBT','pbt','Pbt'))}
+function featureArea(p){const x=prop(p,'luas_h','Luas_h','LUAS_H','luas_ha','LUAS_HA');const n=parseFloat(String(x).replace(/,/g,''));return Number.isFinite(n)?n:0}
+function featureType(p){return clean(prop(p,'gtn3','GTN3','jenis','JENIS','kategori','KATEGORI'))||'Tidak Dinyatakan'}
+async function loadYear(y){
+ if(cache[y])return cache[y];
+ const res=await fetch(files[y]); if(!res.ok)throw new Error('Tidak dapat memuatkan '+files[y]);
+ const d=await res.json(); cache[y]=d; return d;
+}
+function initMap(){
+ map=L.map('map',{zoomControl:true}).setView([3.15,101.52],8.7);
+ L.tileLayer('https://{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',{
+ maxZoom:20,subdomains:['mt0','mt1','mt2','mt3'],attribution:'Map data © Google'
+ }).addTo(map);
+}
+
+function largestPolygonCenter(feature){
+ const g=feature?.geometry;if(!g?.coordinates)return null;
+ const polys=g.type==='Polygon'?[g.coordinates]:g.type==='MultiPolygon'?g.coordinates:[];
+ if(!polys.length)return null;
+ const area=r=>Math.abs(r.reduce((a,p,i)=>{const q=r[(i+r.length-1)%r.length];return a+q[0]*p[1]-p[0]*q[1]},0)/2);
+ const poly=polys.reduce((best,p)=>area(p[0])>area(best[0])?p:best,polys[0]);
+ const r=poly[0];let A=0,Cx=0,Cy=0;
+ for(let i=0,j=r.length-1;i<r.length;j=i++){
+   const c=r[j][0]*r[i][1]-r[i][0]*r[j][1];A+=c;Cx+=(r[j][0]+r[i][0])*c;Cy+=(r[j][1]+r[i][1])*c;
+ }
+ if(Math.abs(A)>1e-12){A*=.5;return [Cy/(6*A),Cx/(6*A)]}
+ const b=L.latLngBounds(r.map(c=>[c[1],c[0]]));return [b.getCenter().lat,b.getCenter().lng];
+}
+function makeBoundaryLabel(f,type){
+ const p=f.properties||{}, name=p.web_name||p.NAMA_PBT||p.nama||p.NAMA||'';
+ const c=largestPolygonCenter(f);if(!name||!c)return null;
+ let n=name;
+ if(type==='pbt')n=String(n).replace(/^Majlis Bandaraya\s+/i,'').replace(/^Majlis Perbandaran\s+/i,'').replace(/^Majlis Daerah\s+/i,'');
+ return L.marker(c,{interactive:false,icon:L.divIcon({className:'boundary-label '+type,html:'<span>'+n+'</span>',iconSize:null})});
+}
+async function loadAdministrativeBoundaries(){
+ try{
+  const [dr,pr]=await Promise.all([
+   fetch('data/sempadan_daerah_negeri_selangor.geojson'),
+   fetch('data/sempadan_pbt_negeri_selangor.geojson')
+  ]);
+  const [dd,pd]=await Promise.all([dr.json(),pr.json()]);
+  districtBoundaryLayer=L.geoJSON(dd,{style:{color:'#4B5563',weight:1.05,opacity:.56,fill:false,dashArray:'7 4 1 4',lineCap:'round'}}).addTo(map);
+  pbtBoundaryLayer=L.geoJSON(pd,{style:{color:'#6B7280',weight:.85,opacity:.46,fill:false,dashArray:'7 4 1 4 1 4',lineCap:'round'}}).addTo(map);
+  districtLabelLayer=L.layerGroup(dd.features.map(f=>makeBoundaryLabel(f,'district')).filter(Boolean)).addTo(map);
+  pbtLabelLayer=L.layerGroup(pd.features.map(f=>makeBoundaryLabel(f,'pbt')).filter(Boolean)).addTo(map);
+  if(geoLayer)geoLayer.bringToFront();
+  const C=L.control({position:'topright'});
+  C.onAdd=()=>{const d=L.DomUtil.create('div','map-layer-control');
+   d.innerHTML='<b>Lapisan Sempadan</b>'+
+   '<label><input type="checkbox" id="bd" checked> Sempadan Daerah Negeri Selangor</label>'+
+   '<label><input type="checkbox" id="bp" checked> Sempadan Pihak Berkuasa Tempatan Negeri Selangor</label>'+
+   '<label><input type="checkbox" id="ld" checked> Label Daerah</label>'+
+   '<label><input type="checkbox" id="lp" checked> Label PBT</label>';
+   L.DomEvent.disableClickPropagation(d);return d};C.addTo(map);
+  [['bd',districtBoundaryLayer],['bp',pbtBoundaryLayer],['ld',districtLabelLayer],['lp',pbtLabelLayer]].forEach(([id,l])=>{
+   document.getElementById(id)?.addEventListener('change',e=>e.target.checked?l.addTo(map):map.removeLayer(l));
+  });
+ }catch(e){console.warn('Boundary gagal dimuatkan',e)}
+}
+
+function fillSelect(id,vals,current){
+ const s=$(id); const first=s.options[0].outerHTML;s.innerHTML=first;
+ [...new Set(vals.filter(Boolean))].sort((a,b)=>String(a).localeCompare(String(b))).forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;s.appendChild(o)});
+ if(current && [...s.options].some(o=>o.value===current))s.value=current;
+}
+function filteredFeatures(data){
+ const py=$('pbt').value, st=$('status').value, ty=$('type').value;
+ return data.features.filter(f=>{
+   const p=f.properties||{};
+   return (py==='ALL'||featurePbt(p)===py) &&
+          (st==='ALL'||normStatus(prop(p,'sts_warta','STS_WARTA','status_warta'))===st) &&
+          (ty==='ALL'||featureType(p)===ty);
+ });
+}
+function popupHtml(p){
+ return `<div class="popup-title">${prop(p,'nama','NAMA','Nama')}</div>
+ <div class="popup-row"><b>PBT</b> ${featurePbt(p)||'-'}</div>
+ <div class="popup-row"><b>Status</b> ${normStatus(prop(p,'sts_warta','STS_WARTA','status_warta'))}</div>
+ <div class="popup-row"><b>Jenis</b> ${featureType(p)}</div>
+ <div class="popup-row"><b>Keluasan</b> ${fmt(featureArea(p))} ha</div>
+ <div class="popup-row"><b>No. Lot</b> ${prop(p,'no_lot','NO_LOT','No_Lot')}</div>
+ <div class="popup-row"><b>No. Warta</b> ${prop(p,'no_warta','NO_WARTA','No_Warta')}</div>
+ <div class="popup-row"><b>Tarikh Warta</b> ${prop(p,'trkh_warta','TRKH_WARTA','tarikh_warta')}</div>`;
+}
+function drawMap(features){
+ if(geoLayer)geoLayer.remove();
+ geoLayer=L.geoJSON({type:'FeatureCollection',features},{
+   style:f=>{
+     const st=normStatus(prop(f.properties||{},'sts_warta','STS_WARTA','status_warta'));
+     return {
+       color:st==='Warta'?'#c94d32':'#4da3ff',
+       weight:st==='Warta'?2.4:2.0,
+       fillColor:st==='Warta'?'#62e45f':'#80e95f',
+       fillOpacity:st==='Warta'?.82:.76,
+       opacity:1
+     };
+   },
+   onEachFeature:(f,l)=>{
+     l.bindPopup(popupHtml(f.properties||{}));
+     l.on({
+       mouseover:e=>e.target.setStyle({weight:3.5,fillOpacity:.95,color:'#f1a53a'}),
+       mouseout:e=>geoLayer && geoLayer.resetStyle(e.target)
+     });
+   }
+ }).addTo(map);
+ if(geoLayer)geoLayer.bringToFront();
+ try{if(features.length)map.fitBounds(geoLayer.getBounds(),{padding:[12,12],maxZoom:13})}catch(e){}
+}
+function destroyChart(c){if(c)c.destroy()}
+function makePbtChart(features){
+ const counts={}; features.forEach(f=>{const p=featurePbt(f.properties||{})||'Lain-lain';counts[p]=(counts[p]||0)+1});
+ const entries=Object.entries(counts).sort((a,b)=>b[1]-a[1]);
+ destroyChart(pbtChart); pbtChart=new Chart($('pbtChart'),{type:'bar',data:{labels:entries.map(x=>x[0]),datasets:[{data:entries.map(x=>x[1]),borderRadius:5,backgroundColor:'#e9782b'}]},options:{indexAxis:'y',maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#708094'},grid:{color:'rgba(124,82,44,.08)'}},y:{ticks:{color:'#435166'},grid:{display:false}}}}});
+}
+function makeStatusChart(features){
+ const counts={};features.forEach(f=>{const s=normStatus(prop(f.properties||{},'sts_warta','STS_WARTA','status_warta'));counts[s]=(counts[s]||0)+1});
+ destroyChart(statusChart);statusChart=new Chart($('statusChart'),{type:'doughnut',data:{labels:Object.keys(counts),datasets:[{data:Object.values(counts),backgroundColor:['#e9782b','#f1a53a','#4da3ff','#c94d32','#ff8a75','#9aa8b8'],borderColor:'#0d2638',borderWidth:2}]},options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#435166',boxWidth:10,font:{size:10}}}}}});
+}
+async function makeTrend(){
+ const years=['2022','2023','2024','2025'];const counts=[],areas=[];
+ for(const y of years){const d=await loadYear(y);counts.push(d.features.length);areas.push(d.features.reduce((s,f)=>s+featureArea(f.properties||{}),0))}
+ destroyChart(trendChart);trendChart=new Chart($('trendChart'),{data:{labels:years,datasets:[{type:'line',label:'Bilangan Rekod',data:counts,borderColor:'#4da3ff',backgroundColor:'#e9782b',tension:.25,yAxisID:'y'},{type:'bar',label:'Keluasan (ha)',data:areas,backgroundColor:'rgba(233,120,43,.65)',borderRadius:5,yAxisID:'y1'}]},options:{maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{color:'#435166'}}},scales:{x:{ticks:{color:'#708094'},grid:{display:false}},y:{position:'left',ticks:{color:'#708094'},grid:{color:'rgba(124,82,44,.08)'}},y1:{position:'right',ticks:{color:'#708094'},grid:{display:false}}}}});
+}
+async function updateAll(){
+ const y=$('year').value; const data=await loadYear(y);
+ const oldP=$('pbt').value,oldS=$('status').value,oldT=$('type').value;
+ const pbts=[...new Set(data.features.map(f=>featurePbt(f.properties||{})).filter(Boolean))];
+ const statuses=[...new Set(data.features.map(f=>normStatus(prop(f.properties||{},'sts_warta','STS_WARTA','status_warta'))))];
+ const types=[...new Set(data.features.map(f=>featureType(f.properties||{})).filter(Boolean))];
+ fillSelect('pbt',pbtOrder.filter(c=>pbts.includes(c)).concat(pbts.filter(c=>!pbtOrder.includes(c))),oldP);
+ fillSelect('status',statuses,oldS); fillSelect('type',types,oldT);
+ syncPbtButtons();
+ const feats=filteredFeatures(data); drawMap(feats); makePbtChart(feats); makeStatusChart(feats);
+ $('kpiCount').textContent=fmt(feats.length);
+ $('kpiArea').textContent=fmt(feats.reduce((s,f)=>s+featureArea(f.properties||{}),0));
+ $('kpiGaz').textContent=fmt(feats.filter(f=>normStatus(prop(f.properties||{},'sts_warta','STS_WARTA','status_warta'))==='Warta').length);
+ $('kpiPbt').textContent=fmt(new Set(feats.map(f=>featurePbt(f.properties||{})).filter(Boolean)).size);
+}
+buildPbtStrip(); initMap();
+ loadAdministrativeBoundaries();
+['year','pbt','status','type'].forEach(id=>$(id).addEventListener('change',()=>{if(id==='pbt')syncPbtButtons();updateAll()}));
+updateAll(); makeTrend();
+
+let analysisTrendChart=null,analysisStatusChart=null;
+
+function initAnalysisPbt(){
+  const sel=document.getElementById('analysisPbt');
+  if(!sel || sel.options.length>1)return;
+  Object.keys(OFFICIAL_CUMULATIVE['2025']||{}).filter(k=>k!=='_TOTAL').sort().forEach(p=>{
+    const o=document.createElement('option');o.value=p;o.textContent=p;sel.appendChild(o);
+  });
+}
+function analysisFmt(n){return Number(n||0).toLocaleString('ms-MY',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function updateAnalysis(){
+  const y=document.getElementById('analysisYear')?.value||'2025';
+  const p=document.getElementById('analysisPbt')?.value||'_TOTAL';
+  const d=(OFFICIAL_CUMULATIVE[y]||{})[p]||(OFFICIAL_CUMULATIVE[y]||{})['_TOTAL'];
+  if(!d)return;
+  [['aTotal',d.total],['aWarta',d.warta],['aProcess',d.dalamProses],['aBelum',d.belumWarta]].forEach(([id,v])=>{
+    const e=document.getElementById(id);if(e)e.textContent=analysisFmt(v);
+  });
+
+  const years=['2022','2023','2024','2025'];
+  const trend=years.map(yy=>(((OFFICIAL_CUMULATIVE[yy]||{})[p]||(OFFICIAL_CUMULATIVE[yy]||{})['_TOTAL']||{}).total||0));
+  if(analysisTrendChart)analysisTrendChart.destroy();
+  analysisTrendChart=new Chart(document.getElementById('analysisTrend'),{
+    type:'line',
+    data:{labels:years,datasets:[{data:trend,label:'Jumlah Kumulatif (ha)',borderColor:'#e9782b',backgroundColor:'rgba(233,120,43,.12)',fill:true,tension:.28,pointRadius:4,pointBackgroundColor:'#c94d32'}]},
+    options:{responsive:true,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#708094'},grid:{color:'rgba(124,82,44,.08)'}},y:{ticks:{color:'#708094'},grid:{color:'rgba(124,82,44,.08)'}}}}
+  });
+
+  if(analysisStatusChart)analysisStatusChart.destroy();
+  analysisStatusChart=new Chart(document.getElementById('analysisStatus'),{
+    type:'doughnut',
+    data:{labels:['Warta','Dalam Proses','Belum Warta'],datasets:[{data:[d.warta,d.dalamProses,d.belumWarta],backgroundColor:['#c94d32','#f1a53a','#6B7280'],borderWidth:0}]},
+    options:{responsive:true,plugins:{legend:{position:'bottom',labels:{color:'#536174',boxWidth:12}}}}
+  });
+
+  const body=document.getElementById('analysisTableBody');if(!body)return;
+  body.innerHTML='';
+  Object.entries(OFFICIAL_CUMULATIVE[y]||{}).filter(([k])=>k!=='_TOTAL').sort((a,b)=>(b[1].total||0)-(a[1].total||0)).forEach(([name,r])=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${name}</td><td>${analysisFmt(r.warta)}</td><td>${analysisFmt(r.dalamProses)}</td><td>${analysisFmt(r.belumWarta)}</td><td><b>${analysisFmt(r.total)}</b></td>`;
+    body.appendChild(tr);
+  });
+}
+function switchDashboardView(view){
+  const overview=document.getElementById('overviewSection'),analysis=document.getElementById('analysisSection');
+  const bo=document.getElementById('tabOverview'),ba=document.getElementById('tabAnalysis');
+  if(view==='analysis'){
+    overview?.classList.remove('active');analysis?.classList.add('active');
+    bo?.classList.remove('active');ba?.classList.add('active');
+    setTimeout(()=>{updateAnalysis();window.dispatchEvent(new Event('resize'));},50);
+  }else{
+    analysis?.classList.remove('active');overview?.classList.add('active');
+    ba?.classList.remove('active');bo?.classList.add('active');
+    setTimeout(()=>{if(map)map.invalidateSize();},50);
+  }
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  initAnalysisPbt();
+  document.getElementById('tabOverview')?.addEventListener('click',()=>switchDashboardView('overview'));
+  document.getElementById('tabAnalysis')?.addEventListener('click',()=>switchDashboardView('analysis'));
+  document.getElementById('analysisYear')?.addEventListener('change',updateAnalysis);
+  document.getElementById('analysisPbt')?.addEventListener('change',updateAnalysis);
+  updateAnalysis();
+});
+
+</script>
+</body>
+</html>
