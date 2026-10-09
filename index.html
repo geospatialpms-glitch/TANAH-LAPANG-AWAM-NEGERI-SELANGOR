@@ -6,19 +6,21 @@
 <title>Dashboard Kawasan Lapang Negeri Selangor</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="https://faeiruzrusman.github.io/SUOLandingPageTesting/assets/logos/logo-suo.png">
+<meta name="theme-color" content="#C43B50">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 :root{
- --bg:#f8f3ed; --panel:#fffdfa; --panel2:#fff8f0; --line:#eadfd2; --ink:#172236;
- --muted:#708094; --accent:#e9782b; --accent2:#c94d32; --gold:#f1a53a; --blue:#4da3ff;
- --green:#38c95d; --lime:#7cff61; --amber:#ffc857;
- --shadow:0 14px 34px rgba(124,82,44,.10); --radius:18px;
-}
+  --bg:#FFF9F1; --panel:#FFFFFF; --panel2:#F7EFE4; --line:#E9DDCF; --ink:#2B2926;
+  --muted:#68615A; --accent:#C43B50; --accent2:#842437; --gold:#D9B84E; --blue:#9B5360;
+  --green:#54876D; --lime:#C8D9A2; --amber:#E4C76B;
+  --shadow:0 14px 34px rgba(55,40,28,.085); --radius:18px;
+ }
 *{box-sizing:border-box}
-body{margin:0;font-family:Inter,Arial,sans-serif;background:radial-gradient(circle at 82% 0%,rgba(242,165,58,.11),transparent 30%),linear-gradient(145deg,#fffaf5,#f7f1ea 55%,#f5eee6);color:var(--ink)}
+body{margin:0;font-family:"DM Sans",Inter,Arial,sans-serif;background:radial-gradient(circle at 82% 0%,rgba(217,184,78,.13),transparent 30%),linear-gradient(145deg,#fbf8f2,#f6efe5 56%,#f9f3ea);color:var(--ink)}
 a{color:inherit}
-.hero{padding:22px 28px;background:linear-gradient(110deg,rgba(255,253,249,.97),rgba(255,247,238,.96));
+.hero{padding:22px 28px;background:linear-gradient(110deg,rgba(255,249,241,.97),rgba(247,239,228,.96));
  border-bottom:1px solid var(--line);box-shadow:0 8px 26px rgba(124,82,44,.055);position:sticky;top:0;z-index:1000;backdrop-filter:blur(12px)}
 .hero-inner{max-width:1600px;margin:auto;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
 .eyebrow{color:var(--accent2);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
@@ -133,6 +135,32 @@ footer{max-width:1600px;margin:0 auto;color:#7f8c9b;font-size:10px;padding:16px;
 .reference-note{font-size:10px;color:#708094;line-height:1.55;margin-top:10px}
 @media(max-width:900px){.reference-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.reference-grid{grid-template-columns:1fr}.gazette-flow{align-items:stretch}.gazette-step{flex:1 1 42%}}
+
+
+/* Tema visual Selangor Urban Observatory */
+.header-brand{display:flex;align-items:center;gap:18px;min-width:0}
+.suo-logo{width:76px;height:76px;object-fit:contain;flex:0 0 auto;filter:drop-shadow(0 4px 8px rgba(55,40,28,.08))}
+.header-copy{min-width:0}
+.eyebrow{color:#842437}
+h1{color:#2B2926;letter-spacing:-.035em}
+.warta-badge{border-color:#E9DDCF;background:rgba(255,255,255,.92)}
+.warta-badge b{color:#842437}
+.pbt-btn:hover{border-color:#C43B50;box-shadow:0 8px 18px rgba(132,36,55,.12)}
+.pbt-btn.active{outline-color:#C43B50;background:#FFF4F1}
+.pbt-btn .all-icon{background:#F7EFE4;color:#842437}
+.kpi em{color:#C43B50}
+.warta-chip{background:#FBECEF;border-color:#E9C8CF;color:#842437}
+.view-tabs-inner{border-color:#E9DDCF;background:#fff}
+.view-tab:hover{background:#FFF9F1}
+.view-tab.active{color:#C43B50;background:#FFF9F1;border-bottom-color:#C43B50}
+.analysis-hero{background:linear-gradient(135deg,#fff,#FFF9F1);border-color:#E9DDCF}
+.reference-card a{color:#842437}
+.gazette-step{background:#F7EFE4;border-color:#E9DDCF;color:#842437}
+.status-pill{border-color:#E9DDCF;background:#FFF9F1}
+.map-legend{background:rgba(255,249,241,.97);border-color:#E9DDCF}
+.map-legend b{color:#842437}
+@media(max-width:900px){.suo-logo{width:64px;height:64px}}
+@media(max-width:560px){.header-brand{gap:12px;align-items:flex-start}.suo-logo{width:52px;height:52px}.header-copy h1{font-size:24px}}
 
 </style>
 </head>
