@@ -162,12 +162,94 @@ h1{color:#2B2926;letter-spacing:-.035em}
 .status-pill{border-color:#E9DDCF;background:#FFF9F1}
 .map-legend{background:rgba(255,249,241,.97);border-color:#E9DDCF}
 .map-legend b{color:#842437}
+.data-note{padding:12px 15px;margin:0 0 14px;border:1px solid #cbded2;background:#f1f8f0;border-radius:12px;color:#325342;font-size:12px;line-height:1.5}
+.search-panel{display:flex;gap:10px;align-items:center;margin:0 0 14px;background:#fff;border:1px solid #e9ddcf;border-radius:14px;padding:10px 13px}
+.search-panel label{font-size:12px;font-weight:800;white-space:nowrap;color:#325342}
+.search-panel input{flex:1;min-width:0;border:1px solid #d8ded7;border-radius:9px;padding:10px;font:inherit}
+.search-panel button{border:0;background:#2b6c4a;color:#fff;padding:10px 14px;border-radius:9px;cursor:pointer}
+.map-legend span{display:flex;align-items:center;gap:6px;margin-top:5px}
+.map-legend .map-swatch{display:inline-block;width:11px;height:11px;border-radius:3px}
+.analysis-controls .control{min-width:0;display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:5px}
+.analysis-controls .control label{position:static;display:block;line-height:1.3;white-space:normal}
+.analysis-controls .control select{width:100%;min-width:0}
+.info-intro{background:linear-gradient(115deg,#fffaf0,#ecf6e9);padding:19px;border:1px solid #eadfd2;border-radius:14px;margin-bottom:14px}
+.info-intro h2{margin:0 0 7px;font-size:23px;color:#17375f}.info-intro p{margin:0;color:#52647b;font-size:12px;line-height:1.7}
+.info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.info-card{background:#fff;border:1px solid #eadfd2;border-radius:13px;padding:18px;box-shadow:0 5px 16px rgba(50,40,30,.04)}
+.info-card h3{margin:0 0 12px;font-size:16px;color:#163b61}.info-card p,.info-card li{font-size:12px;color:#45576b;line-height:1.7}.info-card ul,.info-card ol{padding-left:20px;margin:8px 0}
+.info-card a{color:#ad4c38;font-weight:700}.info-card.wide{grid-column:1/-1}
+.info-card table,.inventory-table{width:100%;border-collapse:collapse;font-size:12px}.info-card th,.info-card td,.inventory-table th,.inventory-table td{border-bottom:1px solid #e9e1d9;padding:9px;text-align:left;vertical-align:top}
+.info-card th,.inventory-table th{background:#f8f3ea;color:#324a62}
+.flow-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin-top:14px}
+.flow-steps span{background:#eef6e9;color:#28593f;border:1px solid #cdddcb;padding:13px 10px;border-radius:9px;text-align:center;font-size:11px;font-weight:800}
+.inventory-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 12px}.inventory-head h2{margin:0;color:#163b61}
+.inventory-tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.inventory-tools input,.inventory-tools select{border:1px solid #dbcfc1;border-radius:9px;padding:10px;background:white;min-width:160px}
+.action-btn{background:linear-gradient(100deg,#d5484b,#ed992c);color:white;border:0;border-radius:9px;padding:11px 15px;font-weight:800;cursor:pointer}
+.table-holder{overflow:auto;background:#fff;border:1px solid #eadfd2;border-radius:12px}.inventory-table{min-width:850px}.inventory-table tbody tr:hover{background:#f4faf1}
+.info-note{background:#fff8e8;border-left:4px solid #d69b42;padding:10px 12px;border-radius:6px;margin-top:12px;font-size:11px;color:#6c573b}
+@media(max-width:850px){.info-grid{grid-template-columns:1fr}.info-card.wide{grid-column:auto}.flow-steps{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.search-panel{flex-wrap:wrap}.search-panel label{width:100%}.search-panel input{flex-basis:65%}}
 @media(max-width:900px){.suo-logo{width:64px;height:64px}}
 @media(max-width:560px){.header-brand{gap:12px;align-items:flex-start}.suo-logo{width:52px;height:52px}.header-copy h1{font-size:24px}}
+
+/* Susun atur SUO: navigasi kiri, penapis dan KPI, peta besar serta analitik kanan. */
+.app-sidebar{position:fixed;z-index:1200;top:0;bottom:0;left:0;width:164px;background:#fffbf5;border-right:1px solid #e8ddce;display:flex;flex-direction:column;box-shadow:3px 0 16px rgba(68,63,48,.05)}
+.sidebar-logo{padding:16px 15px;border-bottom:1px solid #eadfd2;text-align:center}
+.sidebar-logo img{width:91px;height:85px;object-fit:contain}
+.sidebar-menu{padding:16px 8px;display:grid;gap:7px}
+.sidebar-link{display:flex;align-items:center;gap:11px;padding:13px 11px;border:0;background:transparent;color:#314563;font:800 12px Inter,sans-serif;text-align:left;border-radius:9px;cursor:pointer;width:100%}
+.sidebar-link .nav-icon{color:#d85b41;font-size:17px;width:20px;text-align:center}
+.sidebar-link.active{background:linear-gradient(100deg,#dc3e51,#f49a26);color:white;box-shadow:0 6px 12px rgba(205,84,48,.22)}
+.sidebar-link.active .nav-icon{color:white}
+.sidebar-foot{margin-top:auto;padding:18px 9px;border-top:1px solid #eadfd2;text-align:center;color:#2b8058;font-weight:800;font-size:12px}
+.sidebar-foot small{display:block;color:#998d7e;font-weight:500;font-size:9px;margin-top:8px}
+.hero,.view-tabs,.view-section,footer{margin-left:164px}
+.hero{position:relative;top:auto;padding:15px 26px;background:#fffdfa;box-shadow:0 2px 8px rgba(50,52,42,.04)}
+.hero:after{background:linear-gradient(90deg,#db4550,#efa22b);height:2px}
+.hero-inner{max-width:none;grid-template-columns:1fr auto;gap:16px}
+.hero-inner{grid-template-columns:1fr}
+.hero .suo-logo{display:none}.hero .header-copy h1{font-size:25px;letter-spacing:-.025em;color:#172f54;margin:7px 0}
+.hero .eyebrow{font-size:10px;letter-spacing:.1em;color:#b95737}
+.hero .header-copy p{font-size:11px}
+.warta-badge{box-shadow:none;border:0;background:transparent}.warta-badge img{width:62px;height:62px}.warta-badge span{display:none}
+.view-tabs{display:none}
+.wrap,.analysis-wrap{max-width:none;padding:12px 14px 24px;margin:0 auto}
+.wrap{display:flex;flex-direction:column}
+.filters{order:1;background:#fffdfa;padding:13px;border:1px solid #ebdaca;border-radius:12px;grid-template-columns:repeat(4,minmax(0,1fr));box-shadow:0 4px 12px rgba(76,57,39,.04)}
+.filters .control{min-width:0;box-shadow:none;background:transparent;border:0;border-right:1px solid #e9ddcf;border-radius:0}
+.filters .control:last-child{border:0}
+.data-note{order:8;margin-top:12px}
+.search-panel{order:2;box-shadow:none;padding:8px 12px;margin-bottom:10px}
+.kpis{order:3;gap:10px}
+.kpi{border-radius:12px;box-shadow:none;min-width:0;background:#fff}
+.kpi:nth-child(1){background:#fff0f0}.kpi:nth-child(2){background:#fff7e6}.kpi:nth-child(3){background:#edf6fb}.kpi:nth-child(4){background:#edf7e8}
+.kpi strong{color:#17375f}.kpi img{width:38px;height:38px}
+.layout{order:4;grid-template-columns:minmax(0,1.75fr) minmax(290px,.92fr);gap:10px}
+#map{height:505px}.panel{border-radius:12px;box-shadow:none}.side{grid-template-rows:auto minmax(190px,1fr) minmax(190px,1fr);gap:10px}
+.side .chartbox{height:205px}.selected-pbt{min-height:78px;padding:10px 14px}.selected-pbt img{width:49px;height:49px}
+.bottom{order:5;gap:10px;margin-top:10px;grid-template-columns:minmax(0,1fr)}
+.pbt-panel{order:6;margin-top:12px;background:#fff;border-radius:12px;box-shadow:none}
+.pbt-strip{grid-template-columns:repeat(13,minmax(0,1fr))}.pbt-btn{min-height:72px}.pbt-btn img,.pbt-btn .all-icon{width:38px;height:38px}
+.analysis-wrap{padding-top:14px}.analysis-hero,.analysis-panel,.analysis-kpi{box-shadow:none;border-radius:12px}
+@media(max-width:1250px){.layout{grid-template-columns:1fr}.side{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto}.selected-pbt{min-height:auto;flex-direction:column;text-align:center}.pbt-strip{grid-template-columns:repeat(7,1fr)}}
+@media(max-width:900px){.app-sidebar{width:66px}.sidebar-logo{padding:10px 4px}.sidebar-logo img{width:55px;height:54px}.sidebar-link{justify-content:center;padding:13px 5px}.sidebar-link .nav-text,.sidebar-foot{display:none}.hero,.view-tabs,.view-section,footer{margin-left:66px}.filters{grid-template-columns:repeat(2,1fr)}.side{grid-template-columns:1fr}.selected-pbt{flex-direction:row;text-align:left}.warta-badge{display:flex}.warta-badge b{display:none}}
+@media(max-width:560px){.hero{padding:13px}.hero .header-copy h1{font-size:20px}.hero .header-copy p{font-size:10px}.warta-badge{display:none}.filters,.kpis,.bottom{grid-template-columns:1fr}.filters .control{border-right:0;border-bottom:1px solid #eadfd2}.pbt-strip{grid-template-columns:repeat(3,1fr)}#map{height:440px}.wrap{padding:9px}}
 
 </style>
 </head>
 <body>
+<aside class="app-sidebar" aria-label="Navigasi Dashboard">
+ <div class="sidebar-logo"><img src="https://faeiruzrusman.github.io/SUOLandingPageTesting/assets/logos/logo-suo.png" alt="Logo SUO"></div>
+ <nav class="sidebar-menu">
+  <button class="sidebar-link active" data-nav="overview"><span class="nav-icon">⌂</span><span class="nav-text">Ringkasan</span></button>
+  <button class="sidebar-link" data-nav="map"><span class="nav-icon">▣</span><span class="nav-text">Peta Lot</span></button>
+  <button class="sidebar-link" data-nav="analysis"><span class="nav-icon">▥</span><span class="nav-text">Analisis</span></button>
+  <button class="sidebar-link" data-nav="table"><span class="nav-icon">▦</span><span class="nav-text">Jadual</span></button>
+  <button class="sidebar-link" data-nav="download"><span class="nav-icon">⇩</span><span class="nav-text">Muat Turun Data</span></button>
+  <button class="sidebar-link" data-nav="about"><span class="nav-icon">ⓘ</span><span class="nav-text">Tentang</span></button>
+ </nav>
+ <div class="sidebar-foot">PLANMalaysia Selangor<small>Perancangan Melangkaui Sempadan</small></div>
+</aside>
 <header class="hero">
  <div class="hero-inner">
   <div class="header-brand">
@@ -178,7 +260,6 @@ h1{color:#2B2926;letter-spacing:-.035em}
     <p>Analisis spatial 2022–2025 • 2022 ialah data kumulatif sehingga 2022; 2023–2025 ialah data bagi tahun masing-masing.</p>
    </div>
   </div>
-  <div class="warta-badge"><img src="assets/logos/warta.png" alt="Warta"><div><b>Warta Kawasan Lapang Awam</b><span>Identiti status pewartaan dalam dashboard</span></div></div>
  </div>
 </header>
 
@@ -194,7 +275,7 @@ h1{color:#2B2926;letter-spacing:-.035em}
   <div class="analysis-wrap">
     <div class="analysis-hero">
       <h2>Analisis Kumulatif Tanah Lapang Awam</h2>
-      <p>Semua data kumulatif rasmi 2022–2025 ditempatkan di halaman Analysis. Overview kekal untuk data spatial/peta tahunan.</p>
+      <p>Statistik keluasan kumulatif 2022–2025 (semua PBT). Berbeza daripada liputan rekod polygon tahunan dalam Overview; angka kedua-dua tab tidak boleh dibanding secara terus.</p>
       <div class="analysis-controls">
         <div class="control">
           <label>Tahun Kumulatif</label>
@@ -241,7 +322,7 @@ h1{color:#2B2926;letter-spacing:-.035em}
       </div>
     </div>
 
-    <div class="analysis-panel" style="margin-top:14px">
+    <div class="analysis-panel" id="referenceSection" style="margin-top:14px">
       <h3>Rujukan Dasar dan Pemantauan Pewartaan</h3>
       <p>Rujukan kerja untuk membantu semakan status TLA. Sahkan pemakaian dasar dan prosedur terkini dengan agensi berkuasa bagi setiap permohonan.</p>
       <div class="reference-grid">
@@ -287,7 +368,7 @@ h1{color:#2B2926;letter-spacing:-.035em}
 
 <div id="overviewSection" class="view-section active">
 <main class="wrap">
- <section class="pbt-panel">
+ <section class="pbt-panel" id="pbtSection">
   <div class="pbt-head"><b>Pilih Pihak Berkuasa Tempatan (PBT)</b><span>Klik logo untuk menapis paparan</span></div>
   <div class="pbt-strip" id="pbtStrip"></div>
  </section>
@@ -298,6 +379,8 @@ h1{color:#2B2926;letter-spacing:-.035em}
   <div class="control"><img src="assets/icons/warta.svg"><div><label>Status Warta</label><select id="status"><option value="ALL">Semua Status</option></select></div></div>
   <div class="control"><img src="assets/icons/layers.svg"><div><label>Jenis / GTN 3</label><select id="type"><option value="ALL">Semua Jenis</option></select></div></div>
  </section>
+ <div class="data-note" role="note"><b>Data Polygon GIS Tahunan:</b> KPI dan peta di bawah hanya menghitung rekod geometri dalam tahun dipilih. Tab Analysis memaparkan keluasan kumulatif daripada sumber statistik berasingan; jumlahnya tidak semestinya sama. Status tanpa bukti warta perlu disahkan dengan agensi.</div>
+ <div class="search-panel"><label for="searchTla">Carian Tapak / No. Lot</label><input id="searchTla" type="search" placeholder="Taip nama taman, nombor lot atau nombor warta" aria-label="Carian nama tanah lapang atau nombor lot"><button id="clearSearch" type="button">Kosongkan</button></div>
 
  <section class="kpis">
   <div class="kpi"><img src="assets/icons/count.svg"><div><small>Jumlah Kawasan</small><strong id="kpiCount">-</strong><em>bilangan rekod/polygon</em></div></div>
@@ -306,14 +389,18 @@ h1{color:#2B2926;letter-spacing:-.035em}
   <div class="kpi"><img src="assets/icons/map.svg"><div><small>Bilangan PBT</small><strong id="kpiPbt">-</strong><em>PBT dalam paparan semasa</em></div></div>
  </section>
 
- <section class="layout">
+ <section class="layout" id="mapSection">
   <div class="panel">
    <div class="panel-title">Peta Interaktif Kawasan Lapang</div>
    <div class="panel-sub">Klik polygon untuk maklumat terperinci. Semua filter dan logo PBT mengemas kini peta, KPI dan carta serentak.</div>
    <div id="map"><div class="loading">Memuatkan peta…</div>
 <div class="map-legend"><b>Kawasan Lapang</b>
-<span><i class="map-swatch sw-warta"></i> Warta</span>
-<span><i class="map-swatch sw-other"></i> Lain-lain status</span>
+<span><i class="map-swatch" style="background:#16803c"></i> Telah Warta</span>
+<span><i class="map-swatch" style="background:#2563eb"></i> Dalam Proses</span>
+<span><i class="map-swatch" style="background:#d97706"></i> Belum Warta</span>
+<span><i class="map-swatch" style="background:#dc2626"></i> Nyahwarta</span>
+<span><i class="map-swatch" style="background:#6b7280"></i> Tiada Rekod / Lain-lain</span>
+<span><i class="map-swatch" style="background:#8b5cf6"></i> Perlu Semakan (status sumber lain)</span>
 </div></div>
   </div>
   <aside class="side">
@@ -328,10 +415,66 @@ h1{color:#2B2926;letter-spacing:-.035em}
 
  <section class="bottom">
   <div class="panel trend"><div class="panel-title">Perbandingan Data Mengikut Tahun</div><div class="panel-sub">Perbandingan bilangan rekod dan keluasan dataset 2022–2025.</div><div class="chartbox"><canvas id="trendChart"></canvas></div></div>
-  <div class="panel warta-card"><img src="assets/logos/warta.png" alt="Warta"><div><h3>Warta Kawasan Lapang Awam</h3><p>Elemen ini digunakan untuk menonjolkan maklumat pewartaan. Medan status, nombor warta dan tarikh warta kekal dipaparkan dalam popup jika data tersedia.</p><span class="warta-chip">STATUS PEWARTAAN</span></div></div>
  </section>
 </main>
 
+</div>
+
+<div id="tableSection" class="view-section">
+ <div class="analysis-wrap">
+  <div class="info-intro"><h2>Jadual Inventori Tanah Lapang Awam</h2><p>Carian rekod polygon GIS mengikut tahun, PBT dan status. Maklumat yang kosong dalam sumber akan dipaparkan sebagai tiada rekod, bukan dianggap telah disahkan.</p></div>
+  <div class="inventory-tools">
+   <select id="tableYear" aria-label="Tahun inventori"><option>2022</option><option>2023</option><option>2024</option><option selected>2025</option></select>
+   <input id="tableSearch" type="search" placeholder="Cari nama, lot, PBT atau warta" aria-label="Cari dalam jadual">
+   <button class="action-btn" id="downloadCsv" type="button">⇩ Muat Turun CSV</button>
+   <button class="action-btn" id="downloadGeojson" type="button">⇩ Muat Turun GeoJSON</button>
+  </div>
+  <div class="info-note" id="tableCount">Memuatkan inventori…</div>
+  <div class="table-holder"><table class="inventory-table"><thead><tr><th>Nama TLA</th><th>PBT</th><th>Daerah</th><th>Jenis / GTN3</th><th>Status Warta</th><th>No. Lot</th><th>No. Warta</th><th>Keluasan (ha)</th></tr></thead><tbody id="inventoryBody"></tbody></table></div>
+  <p class="reference-note">Untuk prestasi, jadual memaparkan maksimum 200 rekod pertama berdasarkan carian. Fail muat turun merangkumi semua rekod yang sepadan dengan carian pada tahun dipilih.</p>
+ </div>
+</div>
+
+<div id="aboutSection" class="view-section">
+ <div class="analysis-wrap">
+  <div class="info-intro"><h2>Tentang Tanah Lapang Awam &amp; Pewartaan</h2><p>Pusat rujukan perancangan, perundangan, klasifikasi dan aliran kerja pewartaan TLA Negeri Selangor untuk kegunaan pemantauan SUO. Rujukan ini ialah panduan kerja; pemakaian peruntukan bagi setiap kes mesti disahkan oleh agensi berautoriti.</p></div>
+  <div class="info-grid">
+   <article class="info-card wide"><h3>1. Rujukan Utama Tanah Lapang Awam</h3>
+    <table><thead><tr><th>Rujukan</th><th>Kegunaan Dalam Dashboard</th></tr></thead><tbody>
+     <tr><td>Garis Panduan dan Piawaian Perancangan Negeri Selangor 2025</td><td>Semakan piawaian negeri yang berkuat kuasa, khususnya keperluan penyediaan kawasan lapang. <a href="https://www.planmalaysia.gov.my/main/garis-panduan-perancangan" target="_blank" rel="noopener noreferrer">Portal PLANMalaysia ↗</a></td></tr>
+     <tr><td>GP005 (2021) – Garis Panduan Perancangan Kawasan Lapang</td><td>Rujukan prinsip penyediaan, hierarki, fungsi dan reka bentuk tanah lapang. <a href="https://stag.planmalaysia.gov.my/planmalaysia/modules_resources/database_stores/17/46_38.pdf" target="_blank" rel="noopener noreferrer">Baca GP005 ↗</a></td></tr>
+     <tr><td>Akta Perancangan Bandar dan Desa 1976 [Akta 172]</td><td>Definisi kawasan lapang, rancangan pemajuan dan dokumen kebenaran merancang. <a href="https://www.planmalaysia.gov.my/planmalaysia/resources/dokumen/Akta_172/Act_172_Bersih_As_at_1st_June_2021.pdf" target="_blank" rel="noopener noreferrer">Teks Akta 172 ↗</a></td></tr>
+     <tr><td>Kanun Tanah Negara [Akta 828]</td><td>Asas perizaban tanah kerajaan (Seksyen 62) dan pembatalan perizaban (Seksyen 64). <a href="https://ptg.selangor.gov.my/index.php/pages/view/254" target="_blank" rel="noopener noreferrer">PTGS Seksyen 62 ↗</a></td></tr>
+     <tr><td>Pekeliling/SOP SUK, PTGS dan panduan pelaporan MPFN</td><td>Rujukan proses pentadbiran serta laporan status pewartaan; nombor, salinan dan status kuat kuasa perlu disahkan sebelum diguna pakai.</td></tr>
+     <tr><td>Rancangan Struktur Negeri Selangor &amp; Rancangan Tempatan</td><td>Konteks dasar spatial, rangkaian kawasan hijau dan peruntukan tapak dalam rancangan pemajuan.</td></tr>
+    </tbody></table>
+   </article>
+   <article class="info-card"><h3>2. Akta 172 — Peruntukan Untuk Dashboard</h3>
+    <ul><li><b>Seksyen 2(1):</b> rujukan definisi kawasan lapang dan kemudahan berkaitan.</li><li><b>Seksyen 21B:</b> dokumen pelan susun atur dan komponen yang ditunjukkan bagi permohonan kebenaran merancang.</li><li><b>Seksyen 12–16:</b> proses penyediaan dan pengubahan Rancangan Tempatan; semak peruntukan kawasan lapang dalam RT yang terpakai.</li></ul>
+    <p><b>Implikasi GIS:</b> simpan nombor rujukan KM, tarikh kelulusan, pautan pelan susun atur serta rujukan RT bagi menghubungkan TLA dengan keputusan perancangan.</p>
+   </article>
+   <article class="info-card"><h3>3. Kanun Tanah Negara — Status Warta</h3>
+    <p><b>Seksyen 62:</b> perizaban tanah kerajaan untuk maksud awam melalui pewartaan. <b>Seksyen 64:</b> pembatalan perizaban, tertakluk kepada proses dan notis yang ditetapkan.</p>
+    <ul><li>Telah Warta</li><li>Dalam Proses Warta</li><li>Belum Warta</li><li>Nyahwarta</li><li>Tiada Rekod</li></ul>
+    <p>Medan audit penting: <code>STATUS_WARTA</code>, <code>NO_WARTA</code>, <code>TARIKH_WARTA</code>, <code>NO_LOT</code>, <code>NO_PA</code>, <code>SEKSYEN_KTN</code> dan dokumen PDF.</p>
+    <p><a href="https://ptg.selangor.gov.my/index.php/pages/view/1654" target="_blank" rel="noopener noreferrer">Rujukan pembatalan Seksyen 64 ↗</a></p>
+   </article>
+   <article class="info-card"><h3>5. Hierarki TLA</h3><p>Pengelasan awal untuk tujuan dashboard; padankan setiap kelas dengan GP005 serta piawaian Selangor yang terpakai:</p>
+    <ol><li>Taman Wilayah</li><li>Taman Bandaran / Tempatan</li><li>Taman Kejiranan</li><li>Padang Permainan</li><li>Lot Permainan</li><li>Laman Rekreasi / kategori lain yang disahkan</li></ol>
+    <p><b>Cadangan:</b> asingkan medan <code>HIERARKI_TLA</code> daripada <code>JENIS_TLA</code> supaya hierarki tidak bercampur dengan kegunaan fizikal semasa.</p>
+   </article>
+   <article class="info-card"><h3>6. Dasar Penyediaan Kawasan Lapang 10%</h3>
+    <p>Rekod dasar dan jawapan rasmi Selangor pernah merujuk penyediaan <b>10% kawasan lapang atau kadar bersesuaian</b> pada peringkat kebenaran merancang, tertakluk kepada jenis dan skala pembangunan.</p>
+    <p>Untuk permohonan semasa, semak garis panduan negeri terkini, kaedah pengiraan kawasan layak dan syarat kelulusan KM. Jangan gunakan kadar 10% sebagai keputusan automatik untuk semua jenis pemajuan.</p>
+    <p><a href="https://dewan.selangor.gov.my/question/kawasan-hijau-2/" target="_blank" rel="noopener noreferrer">Rujukan Dewan Negeri Selangor ↗</a></p>
+   </article>
+   <article class="info-card wide"><h3>7. Aliran Kerja Pewartaan Untuk SUO</h3><p>Aliran pemantauan umum yang dicadangkan; susunan sebenar bergantung kepada status tanah, jenis urusan, keperluan ukur dan arahan agensi.</p>
+    <div class="flow-steps"><span>1. Pelan / KM Diluluskan</span><span>2. Semakan Serahan &amp; Dokumen</span><span>3. PDT / JUPEM — Semakan &amp; Ukur</span><span>4. PTGS / Kelulusan PBN</span><span>5. Warta &amp; Kemas Kini GIS</span></div>
+    <p>Untuk setiap tindakan rekodkan <b>agensi bertanggungjawab, tarikh permohonan, peringkat semasa, tindakan terakhir, sasaran susulan, isu tertunggak dan pautan dokumen</b>. Kekalkan sejarah warta terdahulu apabila berlaku pembatalan.</p>
+   </article>
+  </div>
+  <div class="info-note">Nota: Maklumat perundangan dan piawaian ini untuk rujukan pengurusan data. Ia bukan pengesahan status warta mana-mana lot. Sila rujuk warta kerajaan, PTGS, PDT dan PBT berkaitan bagi keputusan rasmi.</div>
+ </div>
 </div>
 <footer>Dashboard Tanah Lapang Awam Negeri Selangor • Overview spatial + Analysis kumulatif rasmi 2022–2025</footer>
 
@@ -366,7 +509,10 @@ const $=id=>document.getElementById(id);
 const prop=(p,...keys)=>{for(const k of keys){if(p[k]!==undefined&&p[k]!==null&&String(p[k]).trim()!=='')return p[k]}return '-'};
 const clean=v=>String(v??'').trim();
 const fmt=n=>Number(n||0).toLocaleString('ms-MY',{maximumFractionDigits:2});
-const normStatus=v=>{const s=clean(v).toLowerCase();if(!s)return 'Tidak Dinyatakan';if(s.includes('belum'))return 'Belum Warta';if(s.includes('proses'))return 'Dalam Proses';if(s.includes('nyah'))return 'Nyah Warta';if(s.includes('tolak'))return 'Ditolak';if(s.includes('warta'))return 'Warta';return clean(v)};
+const statusDomain=['Warta','Dalam Proses','Belum Warta','Nyahwarta','Tiada Rekod','Perlu Semakan'];
+const statusColors={'Warta':'#16803c','Dalam Proses':'#2563eb','Belum Warta':'#d97706','Nyahwarta':'#dc2626','Tiada Rekod':'#6b7280','Perlu Semakan':'#8b5cf6'};
+const normStatus=v=>{const s=clean(v).toLowerCase();if(!s||s==='-'||s.includes('tiada')||s.includes('tidak diketahui'))return 'Tiada Rekod';if(s.includes('nyah')||s.includes('batal'))return 'Nyahwarta';if(s.includes('belum'))return 'Belum Warta';if(s.includes('proses'))return 'Dalam Proses';if(s==='warta'||s.includes('telah warta')||s.includes('diwarta'))return 'Warta';return 'Perlu Semakan'};
+const escapeHtml=v=>String(v??'-').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function normalizePbt(v){
  const s=clean(v).replace(/\s+/g,'').toUpperCase();
  const map={'MPKJ':'MPKj','MPSEPANG':'MPSepang','MPSP':'MPSepang','MAJLISPERBANDARANSEPANG':'MPSepang'};
@@ -467,23 +613,29 @@ function fillSelect(id,vals,current){
  if(current && [...s.options].some(o=>o.value===current))s.value=current;
 }
 function filteredFeatures(data){
- const py=$('pbt').value, st=$('status').value, ty=$('type').value;
+ const py=$('pbt').value, st=$('status').value, ty=$('type').value, q=clean($('searchTla').value).toLowerCase();
  return data.features.filter(f=>{
    const p=f.properties||{};
    return (py==='ALL'||featurePbt(p)===py) &&
           (st==='ALL'||normStatus(prop(p,'sts_warta','STS_WARTA','status_warta'))===st) &&
-          (ty==='ALL'||featureType(p)===ty);
+          (ty==='ALL'||featureType(p)===ty) &&
+          (!q||['nama','NAMA','no_lot','NO_LOT','no_warta','NO_WARTA','UPI'].some(k=>clean(p[k]).toLowerCase().includes(q)));
  });
 }
 function popupHtml(p){
- return `<div class="popup-title">${prop(p,'nama','NAMA','Nama')}</div>
- <div class="popup-row"><b>PBT</b> ${featurePbt(p)||'-'}</div>
- <div class="popup-row"><b>Status</b> ${normStatus(prop(p,'sts_warta','STS_WARTA','status_warta'))}</div>
- <div class="popup-row"><b>Jenis</b> ${featureType(p)}</div>
+ const safe=(...keys)=>escapeHtml(prop(p,...keys));
+ return `<div class="popup-title">${safe('nama','NAMA','Nama')}</div>
+ <div class="popup-row"><b>PBT</b> ${escapeHtml(featurePbt(p))}</div>
+ <div class="popup-row"><b>Daerah</b> ${safe('Daerah','DAERAH','daerah')}</div>
+ <div class="popup-row"><b>Status</b> ${escapeHtml(normStatus(prop(p,'sts_warta','STS_WARTA','status_warta')))}</div>
+ <div class="popup-row"><b>Jenis</b> ${escapeHtml(featureType(p))}</div>
  <div class="popup-row"><b>Keluasan</b> ${fmt(featureArea(p))} ha</div>
- <div class="popup-row"><b>No. Lot</b> ${prop(p,'no_lot','NO_LOT','No_Lot')}</div>
- <div class="popup-row"><b>No. Warta</b> ${prop(p,'no_warta','NO_WARTA','No_Warta')}</div>
- <div class="popup-row"><b>Tarikh Warta</b> ${prop(p,'trkh_warta','TRKH_WARTA','tarikh_warta')}</div>`;
+ <div class="popup-row"><b>No. Lot</b> ${safe('no_lot','NO_LOT','No_Lot')}</div>
+ <div class="popup-row"><b>No. Warta</b> ${safe('no_warta','NO_WARTA','No_Warta')}</div>
+ <div class="popup-row"><b>Tarikh Warta</b> ${safe('trkh_warta','TRKH_WARTA','tarikh_warta')}</div>
+ <div class="popup-row"><b>Penyelenggara</b> ${safe('selenggara','PEGAWAI_PENYELENGGARA')}</div>
+ <div class="popup-row"><b>Rujukan Data</b> Polygon GIS tahun ${escapeHtml($('year').value)}</div>
+ <div class="popup-row" style="color:#6b7280;margin-top:8px">Status perlu disahkan dengan dokumen warta rasmi.</div>`;
 }
 function drawMap(features){
  if(geoLayer)geoLayer.remove();
@@ -491,10 +643,10 @@ function drawMap(features){
    style:f=>{
      const st=normStatus(prop(f.properties||{},'sts_warta','STS_WARTA','status_warta'));
      return {
-       color:st==='Warta'?'#c94d32':'#4da3ff',
+       color:statusColors[st]||statusColors['Tiada Rekod'],
        weight:st==='Warta'?2.4:2.0,
-       fillColor:st==='Warta'?'#62e45f':'#80e95f',
-       fillOpacity:st==='Warta'?.82:.76,
+       fillColor:statusColors[st]||statusColors['Tiada Rekod'],
+       fillOpacity:.55,
        opacity:1
      };
    },
@@ -517,7 +669,8 @@ function makePbtChart(features){
 }
 function makeStatusChart(features){
  const counts={};features.forEach(f=>{const s=normStatus(prop(f.properties||{},'sts_warta','STS_WARTA','status_warta'));counts[s]=(counts[s]||0)+1});
- destroyChart(statusChart);statusChart=new Chart($('statusChart'),{type:'doughnut',data:{labels:Object.keys(counts),datasets:[{data:Object.values(counts),backgroundColor:['#e9782b','#f1a53a','#4da3ff','#c94d32','#ff8a75','#9aa8b8'],borderColor:'#0d2638',borderWidth:2}]},options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#435166',boxWidth:10,font:{size:10}}}}}});
+ const labels=statusDomain.filter(k=>counts[k]);
+ destroyChart(statusChart);statusChart=new Chart($('statusChart'),{type:'doughnut',data:{labels,datasets:[{data:labels.map(k=>counts[k]),backgroundColor:labels.map(k=>statusColors[k]),borderColor:'#fff',borderWidth:2}]},options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#435166',boxWidth:10,font:{size:10}}}}}});
 }
 async function makeTrend(){
  const years=['2022','2023','2024','2025'];const counts=[],areas=[];
@@ -530,8 +683,9 @@ async function updateAll(){
  const pbts=[...new Set(data.features.map(f=>featurePbt(f.properties||{})).filter(Boolean))];
  const statuses=[...new Set(data.features.map(f=>normStatus(prop(f.properties||{},'sts_warta','STS_WARTA','status_warta'))))];
  const types=[...new Set(data.features.map(f=>featureType(f.properties||{})).filter(Boolean))];
- fillSelect('pbt',pbtOrder.filter(c=>pbts.includes(c)).concat(pbts.filter(c=>!pbtOrder.includes(c))),oldP);
- fillSelect('status',statuses,oldS); fillSelect('type',types,oldT);
+ fillSelect('pbt',pbtOrder,oldP);
+ [...$('pbt').options].forEach(o=>{if(o.value!=='ALL'&&!pbts.includes(o.value))o.textContent+=' (tiada polygon '+y+')'});
+ fillSelect('status',statusDomain,oldS); fillSelect('type',types,oldT);
  syncPbtButtons();
  const feats=filteredFeatures(data); drawMap(feats); makePbtChart(feats); makeStatusChart(feats);
  $('kpiCount').textContent=fmt(feats.length);
@@ -542,6 +696,9 @@ async function updateAll(){
 buildPbtStrip(); initMap();
  loadAdministrativeBoundaries();
 ['year','pbt','status','type'].forEach(id=>$(id).addEventListener('change',()=>{if(id==='pbt')syncPbtButtons();updateAll()}));
+let searchTimer;
+$('searchTla').addEventListener('input',()=>{clearTimeout(searchTimer);searchTimer=setTimeout(updateAll,180)});
+$('clearSearch').addEventListener('click',()=>{$('searchTla').value='';updateAll();$('searchTla').focus()});
 updateAll(); makeTrend();
 
 let analysisTrendChart=null,analysisStatusChart=null;
@@ -587,15 +744,54 @@ function updateAnalysis(){
     body.appendChild(tr);
   });
 }
+let inventoryResults=[];
+async function updateInventory(){
+  const year=$('tableYear').value,term=clean($('tableSearch').value).toLowerCase();
+  try{
+    const data=await loadYear(year);
+    inventoryResults=data.features.filter(f=>{
+      const p=f.properties||{};
+      return !term||['nama','PBT','Daerah','gtn3','sts_warta','no_lot','no_warta'].some(k=>clean(p[k]).toLowerCase().includes(term));
+    });
+    const body=$('inventoryBody');body.replaceChildren();
+    const fragment=document.createDocumentFragment();
+    for(const feature of inventoryResults.slice(0,200)){
+      const p=feature.properties||{};
+      const values=[prop(p,'nama'),featurePbt(p),prop(p,'Daerah'),featureType(p),normStatus(prop(p,'sts_warta')),prop(p,'no_lot'),prop(p,'no_warta'),fmt(featureArea(p))];
+      const row=document.createElement('tr');
+      values.forEach(value=>{const td=document.createElement('td');td.textContent=value;row.appendChild(td)});
+      fragment.appendChild(row);
+    }
+    body.appendChild(fragment);
+    $('tableCount').textContent=`${fmt(inventoryResults.length)} rekod sepadan dalam data polygon GIS ${year}. Memaparkan ${Math.min(inventoryResults.length,200)} rekod pertama.`;
+  }catch(error){$('tableCount').textContent='Data inventori gagal dimuatkan: '+error.message;inventoryResults=[]}
+}
+function saveDownload(content,filename,type){
+  const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
+function exportInventory(format){
+  const year=$('tableYear').value,features=inventoryResults;
+  if(format==='geojson'){
+    saveDownload(JSON.stringify({type:'FeatureCollection',features}),`TLA_Selangor_${year}_ditapis.geojson`,'application/geo+json');return;
+  }
+  const columns=['NAMA_TLA','PBT','DAERAH','JENIS_TLA','STATUS_WARTA','NO_LOT','NO_WARTA','LUAS_HA'];
+  const quote=value=>{let v=String(value??'');if(/^[=+@\-\t\r]/.test(v))v="'"+v;return '"'+v.replace(/"/g,'""')+'"'};
+  const rows=features.map(({properties:p={}})=>[prop(p,'nama'),featurePbt(p),prop(p,'Daerah'),featureType(p),normStatus(prop(p,'sts_warta')),prop(p,'no_lot'),prop(p,'no_warta'),featureArea(p)].map(quote).join(','));
+  saveDownload('\uFEFF'+[columns.join(','),...rows].join('\r\n'),`TLA_Selangor_${year}_ditapis.csv`,'text/csv;charset=utf-8');
+}
 function switchDashboardView(view){
   const overview=document.getElementById('overviewSection'),analysis=document.getElementById('analysisSection');
   const bo=document.getElementById('tabOverview'),ba=document.getElementById('tabAnalysis');
+  document.querySelectorAll('.view-section').forEach(section=>section.classList.toggle('active',section.id===(view==='analysis'?'analysisSection':view==='table'?'tableSection':view==='about'?'aboutSection':'overviewSection')));
   if(view==='analysis'){
-    overview?.classList.remove('active');analysis?.classList.add('active');
     bo?.classList.remove('active');ba?.classList.add('active');
     setTimeout(()=>{updateAnalysis();window.dispatchEvent(new Event('resize'));},50);
+  }else if(view==='table'){
+    bo?.classList.remove('active');ba?.classList.remove('active');updateInventory();
+  }else if(view==='about'){
+    bo?.classList.remove('active');ba?.classList.remove('active');
   }else{
-    analysis?.classList.remove('active');overview?.classList.add('active');
     ba?.classList.remove('active');bo?.classList.add('active');
     setTimeout(()=>{if(map)map.invalidateSize();},50);
   }
@@ -606,7 +802,30 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('tabAnalysis')?.addEventListener('click',()=>switchDashboardView('analysis'));
   document.getElementById('analysisYear')?.addEventListener('change',updateAnalysis);
   document.getElementById('analysisPbt')?.addEventListener('change',updateAnalysis);
+  document.getElementById('tableYear')?.addEventListener('change',updateInventory);
+  document.getElementById('tableSearch')?.addEventListener('input',()=>{clearTimeout(searchTimer);searchTimer=setTimeout(updateInventory,180)});
+  document.getElementById('downloadCsv')?.addEventListener('click',()=>exportInventory('csv'));
+  document.getElementById('downloadGeojson')?.addEventListener('click',()=>exportInventory('geojson'));
   updateAnalysis();
+  document.querySelectorAll('.sidebar-link').forEach(button=>button.addEventListener('click',()=>{
+    const name=button.dataset.nav;
+    document.querySelectorAll('.sidebar-link').forEach(item=>item.classList.toggle('active',item===button));
+    if(name==='analysis'){
+      switchDashboardView('analysis');
+      window.scrollTo({top:0,behavior:'smooth'});
+    }else if(name==='table'||name==='download'){
+      switchDashboardView('table');
+      window.scrollTo({top:0,behavior:'smooth'});
+      if(name==='download')$('downloadCsv').focus();
+    }else if(name==='about'){
+      switchDashboardView('about');window.scrollTo({top:0,behavior:'smooth'});
+    }else{
+      switchDashboardView('overview');
+      setTimeout(()=>{const target=name==='map'?'mapSection':null;
+        if(target)document.getElementById(target)?.scrollIntoView({behavior:'smooth',block:'start'});else window.scrollTo({top:0,behavior:'smooth'});
+      },90);
+    }
+  }));
 });
 
 </script>
